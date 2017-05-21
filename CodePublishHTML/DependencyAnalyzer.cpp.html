@@ -1,0 +1,250 @@
+<!----------------------------------------------------------------------------
+DependencyAnalyzer.cpp Help file for Project #3
+ Published 4 Apr 2017
+ Abhijit Srikanth, CSE687 - Object Oriented Design, Spring 2017
+
+ The below file is the webpage of the source code for DependencyAnalyzer.cpp and holds links to its dependent files
+
+ Note -Do not replace any markup characters with escape sequences
+----------------------------------------------------------------------------->
+<html>
+<head>
+<link rel = "stylesheet"type = "text/css"href = "../CodePublishHTML/myStyle.css" /></head>
+<body class = "indent">
+<script type="text/javascript" src="../CodePublishHTML/jquery-2.2.4.js"></script>
+<script type="text/javascript" src="../CodePublishHTML/myJS.js"></script><h3>DependencyAnalyzer.cpp</h3>
+<hr><div class = "indent"><h4>Dependencies :</h4><ul><li> <a href="../CodePublishHTML/DependencyAnalysis.h.html">DependencyAnalysis.h</a> </li><li> <a href="../CodePublishHTML/FileSystem.h.html">FileSystem.h</a> </li><li> <a href="../CodePublishHTML/NoSqlDb.h.html">NoSqlDb.h</a> </li><li> <a href="../CodePublishHTML/Tokenizer.h.html">Tokenizer.h</a> </li><li> <a href="../CodePublishHTML/Tokenizer.h.html">Tokenizer.h</a> </li><li> <a href="../CodePublishHTML/typetable.h.html">typetable.h</a> </li><li> <a href="../CodePublishHTML/GrammarHelpers.cpp.html">GrammarHelpers.cpp</a> </li>
+</ul></div><hr>
+<pre>
+/////////////////////////////////////////////////////////////////////
+//  DependencyAnalyzer.cpp - Creates the Dependency Table          //
+//																   //
+//  Language:      Visual C++ 2015                                 //
+//  Platform:      Dell Inspiron, Windows 8.1			           //
+//  Application:   Dependency Analysis - CIS 687 Project 2         //
+//  Author:        Abhijit Srikanth SUID:864888072			       //
+/////////////////////////////////////////////////////////////////////
+
+#include "../DependencyAnalyzer/DependencyAnalysis.h"
+
+using namespace CodeAnalysis;
+
+//&lt;---------------------- Default Constructor -------------------&gt;
+DependencyTable::DependencyTable()
+{
+}
+
+//&lt;---------------------- Parameterised Constructor -------------------&gt;
+DependencyTable::DependencyTable(tableType temp, Files allFiles)
+<div class="header">-  {</div><div class="content">
+	try {
+		setTypeTable(temp);
+		filePaths = allFiles;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout &lt;&lt; e.what();
+	}
+</div>}
+
+//&lt;---------------------- Setting Type Table(private member) -------------------&gt;
+void DependencyTable::setTypeTable(tableType t)
+<div class="header">-  {</div><div class="content">
+	tempTypeTable = t;
+</div>}
+
+//&lt;---------------------- Store all File paths in vector-------------------&gt;
+std::vector&lt;std::string&gt; DependencyTable::getAllFiles()
+<div class="header">-  {</div><div class="content">
+	std::vector&lt;File&gt; tempVector;
+	for (File x : filePaths)
+	{
+		tempVector.push_back(FileSystem::Path::getPath(x) + FileSystem::Path::getName(x));
+	}
+	return tempVector;
+</div>}
+
+//&lt;---------------------- Returning The dependency Table (database) -------------------&gt;
+NoSQLDB::NoSqlDb&lt;std::string&gt;& DependencyTable::getDb()
+<div class="header">-  {</div><div class="content">
+	return dependency_Store;
+</div>}
+
+//&lt;---------------------Creates a map of File to its File path and returns that map --------&gt;
+std::unordered_map&lt;std::string, std::string&gt; DependencyTable::funcFile2Path()
+<div class="header">-  {</div><div class="content">
+	File fileName, filePath;
+	for (File f : filePaths)
+	{
+		filePath = FileSystem::Path::getPath(f) + FileSystem::Path::getName(f);
+		fileName = FileSystem::Path::getName(f);
+		file2PathMap[fileName] = filePath;
+	}
+	return file2PathMap;
+</div>}
+
+//std::string DependencyTable::returnXML(std::string path)
+//{
+//	return dependency_Store.persistIntoXml(path);
+//}
+
+//&lt;---------------------- Main Depdendency function -To build the dependency store -------------&gt;
+std::string DependencyTable::dependencyMain(std::string path)
+<div class="header">-  {</div><div class="content">
+	//std::cout &lt;&lt; "\n\n---------Dependency Package--------\n\n";
+	try {
+
+		for (File each_file : filePaths)
+		{
+			TokensInFile(each_file);
+		}
+		cppAndHeaderDependency();
+		//displayDependency();
+		//return dependency_Store.persistIntoXml(path);
+		return std::string();
+	}
+	catch (std::exception& e)
+	{
+		std::cout &lt;&lt; e.what();
+		return "Exception";
+	}
+</div>}
+
+//&lt;--------------------- Checks for dependency with the tokens in each file -------------------&gt;
+bool DependencyTable::TokensInFile(File eachFile)
+<div class="header">-  {</div><div class="content">
+	try {
+		std::string just_file = FileSystem::Path::getName(eachFile);
+		std::ifstream in(eachFile);
+		if (!in.good())
+		{
+			std::cout &lt;&lt; "\n  can't open " &lt;&lt; eachFile &lt;&lt; "\n\n";
+			return false;
+		}
+		Scanner::Toker toker;
+		toker.returnComments(false);
+		toker.attach(&in);
+		//std::cout &lt;&lt; "\n  current line count = " &lt;&lt; toker.currentLineCount();
+		do
+		{
+			std::string tok = toker.getTok();
+			if (tok == "\n" || tok == "(" || tok == ")" || tok == "[" || tok == "]" || tok == "{" || tok == "}" || tok == ";")
+				continue;
+			//std::cout &lt;&lt; "\n -- " &lt;&lt; tok;
+			storeIntoDep(tok, eachFile);
+		} while (in.good());
+	}
+	catch (std::logic_error& ex)
+	{
+		std::cout &lt;&lt; "\n  " &lt;&lt; ex.what();
+	}
+	return true;
+</div>}
+
+//&lt;---------------------- Checks for dependency, matching with typeTable -------------------&gt;
+bool DependencyTable::checkIfDependent(std::string token)
+<div class="header">-  {</div><div class="content">
+	if (tempTypeTable.find(token) == tempTypeTable.end())
+		return false;
+	return true;
+</div>}
+
+//&lt;---------------------- Storing into Dependency Database table -------------------&gt;
+bool DependencyTable::storeIntoDep(std::string token, File dep_file)
+<div class="header">-  {</div><div class="content">
+	if (checkIfDependent(token))
+	{
+		for (Values vx : tempTypeTable[token])
+		{
+			if (vx.file_name != dep_file)
+			{
+				NoSQLDB::Element&lt;std::string&gt; tempObj = dependency_Store.value(dep_file);
+				tempObj.saveChild(vx.file_name);
+				dependency_Store.saveValue(dep_file, tempObj);
+			}
+		}
+		return true;
+	}
+	return false;
+</div>}
+
+//&lt;-------------------- Adding Header to cpp as dependency ----------------------&gt;
+void DependencyTable::cppAndHeaderDependency()
+<div class="header">-  {</div><div class="content">
+	for (File eachFile : filePaths)
+	{
+		if (FileSystem::Path::getExt(eachFile) == "h")
+		{
+			std::string cppFile = eachFile;
+			cppFile.pop_back();
+			cppFile.pop_back();
+			cppFile.append(".cpp");
+			if (std::find(filePaths.begin(), filePaths.end(), cppFile) != filePaths.end())
+			{
+				NoSQLDB::Element&lt;std::string&gt; tempObj = dependency_Store.value(eachFile);
+				tempObj.saveChild(cppFile);
+				dependency_Store.saveValue(eachFile, tempObj);
+			}
+		}
+	}
+</div>}
+
+//&lt;-------------------- Displaying Dependency table ----------------------&gt;
+void DependencyTable::showDep()
+<div class="header">-  {</div><div class="content">
+	Files keys = dependency_Store.keys();
+	std::cout &lt;&lt; "\n\n\n  " &lt;&lt; "------------------------ Dependency Table -------------------------" &lt;&lt; "\n\n";
+	for (Key key : keys)
+	{
+		std::cout &lt;&lt; std::setw(13) &lt;&lt; " File Name :" &lt;&lt; key &lt;&lt; std::endl;
+		std::cout &lt;&lt; dependency_Store.value(key).show();
+		std::cout &lt;&lt; std::endl;
+	}
+</div>}
+
+
+//void DependencyTable::displayDependency()
+//{
+//
+//	Keys keys = dependency_Store.keys();
+//	for (Key key : keys)
+//	{
+//		std::cout &lt;&lt; "\n  " &lt;&lt; key &lt;&lt; ":";
+//		std::cout &lt;&lt; dependency_Store.value(key).show();
+//	}
+//}
+
+#ifdef TEST_DPAnalyzer
+
+#include &lt;vector&gt;
+#include &lt;string&gt;
+
+int main()
+<div class="header">-  {</div><div class="content">
+	using File = std::string;
+	using Files = std::vector&lt;File&gt;;
+	Files allfilePaths;
+
+	allfilePaths.push_back("C:\\Users\\Abhijit\\Desktop\\Project2_OOD\\TestingPurpose\\TestingPurpose\\B.h");
+	allfilePaths.push_back("C:\\Users\\Abhijit\\Desktop\\Project2_OOD\\TestingPurpose\\TestingPurpose\\A.h");
+	allfilePaths.push_back("C:\\Users\\Abhijit\\Desktop\\Project2_OOD\\TestingPurpose\\TestingPurpose\\A.cpp");
+	allfilePaths.push_back("C:\\Users\\Abhijit\\Desktop\\Project2_OOD\\TestingPurpose\\TestingPurpose\\B.cpp");
+
+	Type_Table tb;
+	tb.populateTypeTable();
+
+	DependencyTable dp_temp(tb.returnTypeTable(), allfilePaths);
+	dp_temp.dependencyMain();
+
+	Files keys = dp_temp.getDb().keys();
+	for (Key key : keys)
+	{
+		std::cout &lt;&lt; "\n  " &lt;&lt; key &lt;&lt; ":";
+		std::cout &lt;&lt; dp_temp.getDb().value(key).show();
+	}
+</div>}
+
+#endif
+</pre>
+</body>
+</html>

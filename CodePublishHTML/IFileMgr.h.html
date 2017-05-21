@@ -1,0 +1,65 @@
+<!----------------------------------------------------------------------------
+IFileMgr.h Help file for Project #3
+ Published 4 Apr 2017
+ Abhijit Srikanth, CSE687 - Object Oriented Design, Spring 2017
+
+ The below file is the webpage of the source code for IFileMgr.h and holds links to its dependent files
+
+ Note -Do not replace any markup characters with escape sequences
+----------------------------------------------------------------------------->
+<html>
+<head>
+<link rel = "stylesheet"type = "text/css"href = "../CodePublishHTML/myStyle.css" /></head>
+<body class = "indent">
+<script type="text/javascript" src="../CodePublishHTML/jquery-2.2.4.js"></script>
+<script type="text/javascript" src="../CodePublishHTML/myJS.js"></script><h3>IFileMgr.h</h3>
+<hr><div class = "indent"><h4>Dependencies :</h4><ul>
+</ul></div><hr>
+<pre>
+#pragma once
+/////////////////////////////////////////////////////////////////////
+// IFileMgr.h - interface for finding files matching specified     //
+//              patterns on a specified path                       //
+// ver 3.0                                                         //
+// Jim Fawcett, MidtermCodeSupplement, Spring 2016                 //
+/////////////////////////////////////////////////////////////////////
+
+#include &lt;string&gt;
+
+namespace FileManager
+{
+  struct IFileEventHandler
+  {
+    virtual void execute(const std::string& fileSpec) = 0;
+  };
+
+  struct IDirEventHandler
+  {
+    virtual void execute(const std::string& dirSpec) = 0;
+  };
+
+  struct IDoneEventHandler
+  {
+    virtual void execute(size_t numFilesProcessed) = 0;
+  };
+
+  struct IFileMgr
+  {
+    virtual ~IFileMgr() {}
+    virtual void addPattern(const std::string& patt) = 0;
+    virtual void search() = 0;
+    virtual void find(const std::string& path) = 0;
+    virtual void regForFiles(IFileEventHandler* pEventHandler) = 0;
+    virtual void regForDirs(IDirEventHandler* pEventHandler) = 0;
+    virtual void regForDone(IDoneEventHandler* pEventHandler) = 0;
+    static IFileMgr* getInstance();
+  };
+
+  struct FileMgrFactory
+  {
+    static IFileMgr* create(const std::string& path);
+  };
+}
+</pre>
+</body>
+</html>
