@@ -86,6 +86,9 @@ public:
 	std::string returnXML(std::string path);
 	std::unordered_map<std::string, std::string> funcFile2Path();
 	void cppAndHeaderDependency();
+	void buildProjectDep();
+	std::string delimiterFuncProjectName(std::string fullPath);
+	void displayProjectDependencies();
 	void showDep();
 
 private:
@@ -93,6 +96,7 @@ private:
 	Files filePaths;
 	NoSQLDB::NoSqlDb<std::string> dependency_Store;
 	std::unordered_map<std::string, std::string> file2PathMap;
+	std::unordered_map<std::string, std::vector<std::string>> projectDependency;
 
 };
 

@@ -81,6 +81,9 @@ std::string DependencyTable::dependencyMain(std::string path)
 			TokensInFile(each_file);
 		}
 		cppAndHeaderDependency();
+
+		buildProjectDep();
+		displayProjectDependencies();
 		//displayDependency();
 		//return dependency_Store.persistIntoXml(path);
 		return std::string();
@@ -172,6 +175,60 @@ void DependencyTable::cppAndHeaderDependency()
 		}
 	}
 }
+
+void DependencyTable::buildProjectDep()
+{
+	Files keys = dependency_Store.keys();
+	for (Key key : keys)
+	{
+		std::string keyProject = delimiterFuncProjectName(key);
+		NoSQLDB::Element<std::string> tempObj = dependency_Store.value(key);
+		std::vector<std::string> tempVector = projectDependency[keyProject];
+		for (File child : tempObj.dependencies.getValue())
+		{
+			std::string depProject = delimiterFuncProjectName(child);
+			if (std::find(tempVector.begin(), tempVector.end(), depProject) == tempVector.end())
+			{
+				tempVector.push_back(depProject);
+			}
+		}
+		projectDependency[keyProject] = tempVector;
+	}
+
+}
+
+std::string DependencyTable::delimiterFuncProjectName(std::string fullPath)
+{
+	std::string x = FileSystem::Path::getPath(fullPath);
+	x.pop_back();
+
+	size_t lastOcc, temp;
+	while (true)
+	{
+		temp = x.find("\\");
+		if (temp == std::string::npos)
+		{
+			break;
+		}
+		x = x.substr(temp + 1, x.length());
+		//lastOcc = temp;
+	}
+	return x;
+}
+
+void DependencyTable::displayProjectDependencies()
+{
+	using Pair = std::pair<std::string, std::vector<std::string>>;
+	for (Pair pair : projectDependency)
+	{
+		std::cout << "\n" << pair.first << "   ---->\n";
+		for (std::string temp : pair.second) {
+			std::cout << temp << "\n";
+		}
+		std::cout << "\n\n";
+	}
+}
+
 
 //<-------------------- Displaying Dependency table ---------------------->
 void DependencyTable::showDep()

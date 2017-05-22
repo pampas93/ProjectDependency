@@ -981,7 +981,7 @@ int main(int argc, char* argv[])
     Rslt::flush();
     exec.showCommandLineArguments(argc, argv);
 	toReduceExecutive(exec);
-	toReduce2();
+	//toReduce2();
 	Files allsubfiles = exec.getAllsubFiles();
 	Type_Table tb;												//Starting of type table
 	tb.populateTypeTable();
@@ -991,17 +991,17 @@ int main(int argc, char* argv[])
 	std::string xmlD = dp.dependencyMain(exec.getPathDepXml());
 	dp.showDep();
 
-	std::cout << "\n*********** Requirement 8 - Processing Command Line arguments by specifying  ************* \n";
-	std::cout << "\t->Path of file directory\n\t->file Patterns(by default, .h and .cpp)\n";
+	//std::cout << "\n*********** Requirement 8 - Processing Command Line arguments by specifying  ************* \n";
+	//std::cout << "\t->Path of file directory\n\t->file Patterns(by default, .h and .cpp)\n";
 
-	std::cout << "\n*********** Requirement 9 - Demonstrating all the packages used in Project 3 (Shown in index Page webpage) ************* \n";
-	std::cout << "\t->AbstractSyntaxTree\n\t->CodeAnalyzer\n\t->CppProperties\n\t->DepenencyAnalyzer\n\t->FileSystem\n\t->HTMLBuilder";
-	std::cout << "\n\t->NoSqlDb\n\t->Tokenizer\n\t->TypeTable\n";
+	//std::cout << "\n*********** Requirement 9 - Demonstrating all the packages used in Project 3 (Shown in index Page webpage) ************* \n";
+	//std::cout << "\t->AbstractSyntaxTree\n\t->CodeAnalyzer\n\t->CppProperties\n\t->DepenencyAnalyzer\n\t->FileSystem\n\t->HTMLBuilder";
+	//std::cout << "\n\t->NoSqlDb\n\t->Tokenizer\n\t->TypeTable\n";
 
 	htmlClass hClass;
-	std::string toOpen = hClass.htmlMainClass(dp, exec.getPathDir(), tb.returnLineMap());
+	//std::string toOpen = hClass.htmlMainClass(dp, exec.getPathDir(), tb.returnLineMap());
 
-	openBrowser(toOpen);
+	//openBrowser(toOpen);
   }
   catch (std::exception& except)
   {    exec.flushLogger();
