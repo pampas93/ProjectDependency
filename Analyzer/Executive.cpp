@@ -168,6 +168,7 @@ void showUsage()
 }
 //----< show command line arguments >--------------------------------
 
+
 void CodeAnalysisExecutive::showCommandLineArguments(int argc, char* argv[])
 {
   std::ostringstream out;
@@ -962,12 +963,60 @@ std::string CodeAnalysisExecutive::systemTime()
   std::string temp(buffer);
   return temp;
 }
-//----< conduct code analysis >--------------------------------------
+
+
+std::unordered_map<std::string, std::vector<std::string>> CodeAnalysis::CodeAnalysisExecutive::ExecutiveMain4GUI()
+{
+	setDisplayModes();
+	startLogger(std::cout);
+	getSourceFiles();
+	processSourceCode(true);
+	complexityAnalysis();
+	dispatchOptionalDisplays();
+	//exec.flushLogger();
+	Rslt::write("\n");
+	std::ostringstream out;
+	out << "\n  " << std::setw(10) << "searched" << std::setw(6) << numDirs() << " dirs";
+	out << "\n  " << std::setw(10) << "processed" << std::setw(6) << numFiles() << " files";
+	Rslt::write(out.str());
+	Rslt::write("\n");
+	stopLogger();
+
+	Files allsubfiles = getAllsubFiles();
+	Type_Table tb;												//Starting of type table
+	tb.populateTypeTable();
+	DependencyTable dp(tb.returnTypeTable(), allsubfiles);		//Starting of dependency table
+	std::string xmlD = dp.dependencyMain(getPathDepXml());
+	dp.showDep();
+
+	using MapofDep = std::unordered_map<std::string, std::vector<std::string>>;
+	MapofDep fileDep = dp.returnFileDependency();
+	MapofDep projectDep = dp.returnProjectDependency();
+	
+	std::string newPath = "C:/Users/Abhijit/Desktop/ProjectDependency/depOutput.txt";
+	std::ofstream doc(newPath);
+	using Item = std::pair<std::string, std::vector<std::string>>;
+	for (Item item : projectDep)
+	{
+		doc << item.first << "--------->";
+		doc << std::endl ;
+		for (std::string y : item.second) {
+			doc << y << "\t";
+		}
+		doc << "\n\n";
+	}
+	doc.close();
+
+	return projectDep;
+}
 
 #include <fstream>
 
+#ifdef Test_Executive
+
 int main(int argc, char* argv[])
-{  using namespace CodeAnalysis;
+{  
+	using namespace CodeAnalysis;
   CodeAnalysisExecutive exec;
   try {    bool succeeded = exec.ProcessCommandLine(argc, argv);
     if (!succeeded)
@@ -989,7 +1038,10 @@ int main(int argc, char* argv[])
 	std::cout << "\n*********** Requirement 7 - Used functionality from Project 2 and provided links to dependent files in Webpage ********** ";
 	DependencyTable dp(tb.returnTypeTable(),allsubfiles);		//Starting of dependency table
 	std::string xmlD = dp.dependencyMain(exec.getPathDepXml());
-	dp.showDep();
+	//dp.showDep();
+	using MapofDep = std::unordered_map<std::string, std::vector<std::string>>;
+	MapofDep fileDep = dp.returnFileDependency();
+	MapofDep projectDep = dp.returnProjectDependency();
 
 	//std::cout << "\n*********** Requirement 8 - Processing Command Line arguments by specifying  ************* \n";
 	//std::cout << "\t->Path of file directory\n\t->file Patterns(by default, .h and .cpp)\n";
@@ -1010,3 +1062,5 @@ int main(int argc, char* argv[])
     return 1;			}
   getchar();
   return 0;		}
+
+#endif // Test_Executive

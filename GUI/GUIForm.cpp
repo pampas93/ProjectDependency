@@ -23,6 +23,12 @@ void MarshalString(String ^ s, std::string& os) {
 }
 
 
+void GUI::GUIForm::AnalyzerMain()
+{
+	bridgerObj->start(folderPath);
+	return;
+}
+
 System::Void GUI::GUIForm::button1_Click(System::Object ^ sender, System::EventArgs ^ e)
 {
 	System::Windows::Forms::DialogResult result = folderBrowserDialog1->ShowDialog();
@@ -31,25 +37,24 @@ System::Void GUI::GUIForm::button1_Click(System::Object ^ sender, System::EventA
 	std::string folder;
 	MarshalString(temp, folder);
 	folderPath = _strdup(folder.c_str());
-	
+
 	return;
 }
 
 System::Void GUI::GUIForm::button2_Click(System::Object ^ sender, System::EventArgs ^ e)
 {
-	char * argvArray[7];
-	std::string temp = "simbly";
-
-	argvArray[0] = _strdup(temp.c_str());
-	argvArray[1] = folderPath;
-	
-	std::string x[] = { "simbly","pathActually","*.h","*.cpp","/m","/f","/r" };
-	for (int i = 2; i < 7; i++) {
-		const char* xx = x[i].c_str();
-		argvArray[i] = _strdup(xx);
+	if (folderPath == NULL) {
+		this->label2->Text = "Select a Folder";
+	}
+	else {
+		this->label2->Text = "Building Dependencies, Please Do not click anything";
+		AnalyzerMain();
+		//bridgerObj->start(folderPath);
+		this->label2->Text = "Done";
+		this->button3->Show();
 	}
 
-	return System::Void();
+	return ;
 }
 
 System::Void GUI::GUIForm::button3_Click(System::Object ^ sender, System::EventArgs ^ e)

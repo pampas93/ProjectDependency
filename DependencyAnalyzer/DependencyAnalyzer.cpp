@@ -9,6 +9,7 @@
 
 #include "../DependencyAnalyzer/DependencyAnalysis.h"
 
+
 using namespace CodeAnalysis;
 
 //<---------------------- Default Constructor ------------------->
@@ -176,6 +177,7 @@ void DependencyTable::cppAndHeaderDependency()
 	}
 }
 
+// ----------- Building Projectdependency map ----------
 void DependencyTable::buildProjectDep()
 {
 	Files keys = dependency_Store.keys();
@@ -197,12 +199,13 @@ void DependencyTable::buildProjectDep()
 
 }
 
+//----------Delimiter function to get Project name , Delimiter used is "//" -------
 std::string DependencyTable::delimiterFuncProjectName(std::string fullPath)
 {
 	std::string x = FileSystem::Path::getPath(fullPath);
 	x.pop_back();
 
-	size_t lastOcc, temp;
+	size_t temp;
 	while (true)
 	{
 		temp = x.find("\\");
@@ -216,6 +219,7 @@ std::string DependencyTable::delimiterFuncProjectName(std::string fullPath)
 	return x;
 }
 
+//-------- Testing Purpose, displaying dependencies -----------
 void DependencyTable::displayProjectDependencies()
 {
 	using Pair = std::pair<std::string, std::vector<std::string>>;
@@ -229,10 +233,40 @@ void DependencyTable::displayProjectDependencies()
 	}
 }
 
+//--------Returns private variable ProjectDependency map-------------
+std::unordered_map<std::string, std::vector<std::string>> DependencyTable::returnProjectDependency()
+{
+	return projectDependency;
+}
+
+//-------- Builds and Returns private variable FileDependency map-------------
+std::unordered_map<std::string, std::vector<std::string>> DependencyTable::returnFileDependency()
+{
+	Files keys = dependency_Store.keys();
+	for (Key key : keys)
+	{
+		NoSQLDB::Element<std::string> tempObj = dependency_Store.value(key);
+		std::vector<std::string> tempVector;
+		for (File child : tempObj.dependencies.getValue())
+		{
+			std::string fileName = FileSystem::Path::getName(child);
+			tempVector.push_back(fileName);
+		}
+		std::string fileName2 = FileSystem::Path::getName(key);
+		fileDependency[fileName2] = tempVector;
+	}
+	
+	return fileDependency;
+}
+
 
 //<-------------------- Displaying Dependency table ---------------------->
 void DependencyTable::showDep()
 {
+	/*std::string newPath = "C:/Users/Abhijit/Desktop/ProjectDependency/depOutput.txt";
+	std::ofstream doc(newPath);
+*/
+
 	Files keys = dependency_Store.keys();
 	std::cout << "\n\n\n  " << "------------------------ Dependency Table -------------------------" << "\n\n";
 	for (Key key : keys)
@@ -240,7 +274,13 @@ void DependencyTable::showDep()
 		std::cout << std::setw(13) << " File Name :" << key << std::endl;
 		std::cout << dependency_Store.value(key).show();
 		std::cout << std::endl;
+		//doc << std::setw(13) << " File Name :" << key << std::endl;
+		//doc << dependency_Store.value(key).show();
+		//doc << std::endl;
 	}
+
+	//doc.close();
+
 }
 
 

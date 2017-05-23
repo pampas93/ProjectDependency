@@ -84,6 +84,10 @@
 #include <unordered_map>
 #include <iosfwd>
 
+#include <ostream>
+#include <fstream>
+#include <direct.h>
+
 #include "../Parser/Parser.h"
 #include "../FileMgr/FileMgr.h"
 #include "../Parser/ConfigureParser.h"
@@ -144,6 +148,8 @@ namespace CodeAnalysis
 
     CodeAnalysisExecutive(const CodeAnalysisExecutive&) = delete;
     CodeAnalysisExecutive& operator=(const CodeAnalysisExecutive&) = delete;
+
+	std::unordered_map<std::string, std::vector<std::string>> ExecutiveMain4GUI();
 
     void showCommandLineArguments(int argc, char* argv[]);
     bool ProcessCommandLine(int argc, char* argv[]);

@@ -71,6 +71,7 @@ public:
 	using tableType = std::unordered_map<Key, Value_Vector>;
 	using File = std::string;
 	using Files = std::vector<File>;
+	using MapofDep = std::unordered_map<std::string, std::vector<std::string>>;
 
 	DependencyTable();
 	DependencyTable(tableType temp, Files allFiles);
@@ -89,6 +90,9 @@ public:
 	void buildProjectDep();
 	std::string delimiterFuncProjectName(std::string fullPath);
 	void displayProjectDependencies();
+	MapofDep returnProjectDependency();
+	MapofDep returnFileDependency();
+
 	void showDep();
 
 private:
@@ -97,6 +101,7 @@ private:
 	NoSQLDB::NoSqlDb<std::string> dependency_Store;
 	std::unordered_map<std::string, std::string> file2PathMap;
 	std::unordered_map<std::string, std::vector<std::string>> projectDependency;
+	std::unordered_map<std::string, std::vector<std::string>> fileDependency;
 
 };
 
