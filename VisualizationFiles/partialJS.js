@@ -5,7 +5,7 @@ var color = d3.scale.category20();
 
 var force = d3.layout.force()
     .charge(-320)
-    .linkDistance(200)
+    .linkDistance(100)
     .size([width, height]);
 
 var svg = d3.select("body").append("svg")

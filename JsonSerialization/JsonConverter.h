@@ -16,13 +16,21 @@ public:
 
 	std::string jsonMain(MapofDep fileDepMap, MapofDep projDepMap, Files fileListEx);
 	std::string nodeString();
-	int getFileIndex(std::string file);
 	std::string linksString();
+
+	std::string projectNodeString();
+	std::string projectLinksString();
+	void buildFile2ProjectMap();
+
+	std::string delimiterFuncProjectName(std::string fullPath);
 
 private:
 	MapofDep fileDep;
 	MapofDep projDep;
+	std::unordered_map<std::string, std::string> file2ProjectMap;
 	Files fileList;
+	Files projectList;
 	FileMap fileIndexMap;
+	FileMap projIndexMap;
 };
 

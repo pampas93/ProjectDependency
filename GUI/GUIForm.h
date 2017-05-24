@@ -2,10 +2,6 @@
 #include <string>
 #include <iostream>
 #include "../Bridger/bridger.h"
-//#include "../MockChannel/MockChannel.h"
-//#include "../HTMLBuilder/htmlBuilder.h"
-//#include <thread>
-//#include "../DependencyAnalyzer/DependencyAnalysis.h"
 
 namespace GUI {
 
@@ -166,7 +162,7 @@ namespace GUI {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button1);
 			this->Name = L"GUIForm";
-			this->Text = L"Project Dependency [P3]";
+			this->Text = L"Project Dependency [3P]";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

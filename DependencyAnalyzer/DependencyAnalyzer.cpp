@@ -184,6 +184,9 @@ void DependencyTable::buildProjectDep()
 	for (Key key : keys)
 	{
 		std::string keyProject = delimiterFuncProjectName(key);
+
+		file2ProjectMap[key] = keyProject;
+
 		NoSQLDB::Element<std::string> tempObj = dependency_Store.value(key);
 		std::vector<std::string> tempVector = projectDependency[keyProject];
 		for (File child : tempObj.dependencies.getValue())
@@ -218,6 +221,7 @@ std::string DependencyTable::delimiterFuncProjectName(std::string fullPath)
 	}
 	return x;
 }
+
 
 //-------- Testing Purpose, displaying dependencies -----------
 void DependencyTable::displayProjectDependencies()
@@ -257,6 +261,11 @@ std::unordered_map<std::string, std::vector<std::string>> DependencyTable::retur
 	}
 	
 	return fileDependency;
+}
+
+std::unordered_map<std::string, std::string> DependencyTable::returnFileProjMap()
+{
+	return file2ProjectMap;
 }
 
 

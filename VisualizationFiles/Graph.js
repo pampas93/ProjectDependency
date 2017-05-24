@@ -1,6 +1,6 @@
 window.onload=function(){
 var graph = 
-{"nodes":[{"name":"AbstrSynTree.h","group" : 1},{"name":"AbstrSynTree.cpp","group" : 1}],"links":[{"source":1,"target":0,"value": 1},{"source":0,"target":1,"value": 1}]};
+{"nodes":[{"name":"TypeTable","group" : 0},{"name":"Utilities","group" : 1},{"name":"XmlDocument","group" : 2},{"name":"XmlElement","group" : 3},{"name":"XmlElementParts","group" : 4},{"name":"XmlParser","group" : 5}],"links":[{"source":5,"target":2,"value": 1},{"source":5,"target":3,"value": 1},{"source":5,"target":4,"value": 1},{"source":5,"target":1,"value": 1},{"source":2,"target":3,"value": 1},{"source":2,"target":5,"value": 1}]};
 var width = 960,
     height = 500;
 
@@ -8,7 +8,7 @@ var color = d3.scale.category20();
 
 var force = d3.layout.force()
     .charge(-320)
-    .linkDistance(200)
+    .linkDistance(100)
     .size([width, height]);
 
 var svg = d3.select("body").append("svg")

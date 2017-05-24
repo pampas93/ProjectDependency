@@ -91,6 +91,7 @@ public:
 	void displayProjectDependencies();
 	MapofDep returnProjectDependency();
 	MapofDep returnFileDependency();
+	std::unordered_map<std::string, std::string> returnFileProjMap();
 
 	void showDep();
 
@@ -101,6 +102,7 @@ private:
 	std::unordered_map<std::string, std::string> file2PathMap;
 	std::unordered_map<std::string, std::vector<std::string>> projectDependency;
 	std::unordered_map<std::string, std::vector<std::string>> fileDependency;
+	std::unordered_map<std::string, std::string> file2ProjectMap;
 
 };
 
