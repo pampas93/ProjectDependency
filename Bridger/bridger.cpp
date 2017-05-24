@@ -8,6 +8,7 @@ class Bridger : public IBridger
 {
 public:
 	void start(char* path);
+	void open();
 	void stop();
 private:
 };
@@ -32,6 +33,17 @@ void Bridger::start(char* path)
 	
 	return;
 	//std::cout << "Tester";
+}
+
+void Bridger::open()
+{
+	std::string f = "file:///" + FileSystem::Path::getFullFileSpec("../VisualizationFiles/visualization.html");
+	std::wstring ff = std::wstring(f.begin(), f.end());
+	LPCWSTR lpcff = ff.c_str();
+	LPCWSTR a = L"open";
+	LPCWSTR browser = L"chrome.exe";
+	ShellExecute(NULL, a, browser, lpcff, NULL, SW_SHOWDEFAULT);
+
 }
 
 void Bridger::stop()

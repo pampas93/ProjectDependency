@@ -19,11 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{936434E9-93F0-467B-BBB7-D682483244BA}</ProjectGuid>
+    <ProjectGuid>{9D5563C2-AE58-4A43-A532-6E18CF51E589}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Executive</RootNamespace>
+    <RootNamespace>DataVisualization</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>CodeAnalyzer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -88,7 +87,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;TEST_EXECUTIVE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
@@ -147,63 +146,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\AbstractSyntaxTree\AbstrSynTree.cpp" />
-    <ClCompile Include="..\FileMgr\FileMgr.cpp" />
-    <ClCompile Include="..\FileSystem\FileSystem.cpp" />
-    <ClCompile Include="..\GrammarHelpers\GrammarHelpers.cpp" />
-    <ClCompile Include="..\Logger\Logger.cpp" />
-    <ClCompile Include="..\Parser\ActionsAndRules.cpp" />
-    <ClCompile Include="..\Parser\ConfigureParser.cpp" />
-    <ClCompile Include="..\Parser\Parser.cpp" />
-    <ClCompile Include="..\ScopeStack\ScopeStack.cpp" />
-    <ClCompile Include="..\SemiExp\SemiExp.cpp" />
-    <ClCompile Include="..\Tokenizer\Tokenizer.cpp" />
-    <ClCompile Include="..\Utilities\Utilities.cpp" />
-    <ClCompile Include="Executive.cpp" />
+    <ClInclude Include="DataVisualization.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\AbstractSyntaxTree\AbstrSynTree.h" />
-    <ClInclude Include="..\FileMgr\FileMgr.h" />
-    <ClInclude Include="..\FileMgr\IFileMgr.h" />
-    <ClInclude Include="..\FileSystem\FileSystem.h" />
-    <ClInclude Include="..\GrammarHelpers\GrammarHelpers.h" />
-    <ClInclude Include="..\HTMLBuilder\htmlBuilder.h" />
-    <ClInclude Include="..\Logger\Logger.h" />
-    <ClInclude Include="..\Parser\ActionsAndRules.h" />
-    <ClInclude Include="..\Parser\ConfigureParser.h" />
-    <ClInclude Include="..\Parser\Parser.h" />
-    <ClInclude Include="..\ScopeStack\ScopeStack.h" />
-    <ClInclude Include="..\SemiExp\itokcollection.h" />
-    <ClInclude Include="..\SemiExp\SemiExp.h" />
-    <ClInclude Include="..\Tokenizer\Tokenizer.h" />
-    <ClInclude Include="..\Utilities\Utilities.h" />
-    <ClInclude Include="Executive.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataVisualization\DataVisualization.vcxproj">
-      <Project>{9d5563c2-ae58-4a43-a532-6e18cf51e589}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\DependencyAnalyzer\DependencyAnalyzer.vcxproj">
-      <Project>{ae9bb80e-c267-44f4-9e61-567a37279b30}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Display\Display.vcxproj">
-      <Project>{187b40fb-611c-437d-b384-39fd3b6fc19e}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\HTMLBuilder\HTMLBuilder.vcxproj">
-      <Project>{3f52488d-be8a-42a4-9698-853471bcaa91}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\JsonSerialization\JsonSerialization.vcxproj">
-      <Project>{915e46dd-b37e-41a1-902e-0f8aa7f5636f}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\StrongComponents\StrongComponents.vcxproj">
-      <Project>{4b251f53-1b15-4c2b-9863-98d886df35b4}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\TypeTable\TypeTable.vcxproj">
-      <Project>{fe0e442d-c907-4ad7-9cf2-f6c725dc9aa3}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\XmlDocument\XmlDocument\XmlDocument.vcxproj">
-      <Project>{0a82ecdc-7520-453a-8f2c-d813feee7537}</Project>
-    </ProjectReference>
+    <ClCompile Include="DataVisualization.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

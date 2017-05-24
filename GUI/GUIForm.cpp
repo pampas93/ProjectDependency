@@ -64,5 +64,6 @@ System::Void GUI::GUIForm::button2_Click(System::Object ^ sender, System::EventA
 
 System::Void GUI::GUIForm::button3_Click(System::Object ^ sender, System::EventArgs ^ e)
 {
-	return System::Void();
+	bridgerObj->open();
+	return ;
 }

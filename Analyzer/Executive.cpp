@@ -40,6 +40,7 @@
 #include "../Display/Display.h"
 #include "../HTMLBuilder/htmlBuilder.h"
 #include "../JsonSerialization/JsonConverter.h"
+#include "../DataVisualization/DataVisualization.h"
 
 using Rslt = Logging::StaticLogger<0>;  // use for application results
 using Demo = Logging::StaticLogger<1>;  // use for demonstrations of processing
@@ -999,6 +1000,10 @@ std::unordered_map<std::string, std::vector<std::string>> CodeAnalysis::CodeAnal
 	
 	std::string newPath = "C:/Users/Abhijit/Desktop/ProjectDependency/depOutput.txt";
 	std::ofstream doc(newPath);
+
+	Visualization vs;
+	std::string vsPath = vs.visualizationMain(jsonMainString);
+
 	//using Item = std::pair<std::string, std::vector<std::string>>;
 	//for (Item item : fileDep)
 	//{

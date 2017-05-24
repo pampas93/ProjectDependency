@@ -6,6 +6,7 @@ struct IBridger
 {
 public:
 	virtual void start(char* path) = 0;
+	virtual void open()= 0;
 	virtual void stop() = 0;
 };
 
