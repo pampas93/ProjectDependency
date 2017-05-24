@@ -39,6 +39,7 @@
 #include "../StrongComponents/SCC.h"
 #include "../Display/Display.h"
 #include "../HTMLBuilder/htmlBuilder.h"
+#include "../JsonSerialization/JsonConverter.h"
 
 using Rslt = Logging::StaticLogger<0>;  // use for application results
 using Demo = Logging::StaticLogger<1>;  // use for demonstrations of processing
@@ -992,19 +993,23 @@ std::unordered_map<std::string, std::vector<std::string>> CodeAnalysis::CodeAnal
 	using MapofDep = std::unordered_map<std::string, std::vector<std::string>>;
 	MapofDep fileDep = dp.returnFileDependency();
 	MapofDep projectDep = dp.returnProjectDependency();
+
+	JsonConverter jsonObj;
+	std::string jsonMainString = jsonObj.jsonMain(fileDep, projectDep, allsubfiles);
 	
 	std::string newPath = "C:/Users/Abhijit/Desktop/ProjectDependency/depOutput.txt";
 	std::ofstream doc(newPath);
-	using Item = std::pair<std::string, std::vector<std::string>>;
-	for (Item item : projectDep)
-	{
-		doc << item.first << "--------->";
-		doc << std::endl ;
-		for (std::string y : item.second) {
-			doc << y << "\t";
-		}
-		doc << "\n\n";
-	}
+	//using Item = std::pair<std::string, std::vector<std::string>>;
+	//for (Item item : fileDep)
+	//{
+	//	doc << item.first << "--------->";
+	//	doc << std::endl ;
+	//	for (std::string y : item.second) {
+	//		doc << y << "\t";
+	//	}
+	//	doc << "\n\n";
+	//}
+	doc << jsonMainString;
 	doc.close();
 
 	return projectDep;

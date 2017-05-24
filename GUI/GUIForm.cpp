@@ -32,11 +32,16 @@ void GUI::GUIForm::AnalyzerMain()
 System::Void GUI::GUIForm::button1_Click(System::Object ^ sender, System::EventArgs ^ e)
 {
 	System::Windows::Forms::DialogResult result = folderBrowserDialog1->ShowDialog();
-	this->label1->Text = folderBrowserDialog1->SelectedPath;
-	System::String ^ temp = this->label1->Text;
-	std::string folder;
-	MarshalString(temp, folder);
-	folderPath = _strdup(folder.c_str());
+	if (result == System::Windows::Forms::DialogResult::OK)
+	{
+		this->label1->Text = folderBrowserDialog1->SelectedPath;
+		System::String ^ temp = this->label1->Text;
+		std::string folder;
+		MarshalString(temp, folder);
+		folderPath = _strdup(folder.c_str());
+		this->label2->Text = "Build Dependency (Click once)";
+		this->button3->Hide();
+	}
 
 	return;
 }

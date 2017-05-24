@@ -50,7 +50,6 @@ ver 1.0 : 04 Apr 17
 #include <unordered_map>
 #include <iostream>
 #include <vector>
-#include <string>
 
 #include "../AbstractSyntaxTree/AbstrSynTree.h"
 #include "../Parser/ActionsAndRules.h"
