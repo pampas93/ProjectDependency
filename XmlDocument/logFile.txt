@@ -1,4 +1,4 @@
                                                                                
 
-    searched    25 dirs
+    searched    19 dirs
    processed    13 files

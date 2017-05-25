@@ -1,7 +1,7 @@
 window.onload=function(){
 var graph = 
 {"nodes":[{"name":"Utilities","group" : 0},{"name":"XmlDocument","group" : 1},{"name":"XmlElement","group" : 2},{"name":"XmlElementParts","group" : 3},{"name":"XmlParser","group" : 4}],"links":[{"source":4,"target":1,"value": 1},{"source":4,"target":2,"value": 1},{"source":4,"target":3,"value": 1},{"source":4,"target":0,"value": 1},{"source":1,"target":2,"value": 1},{"source":1,"target":4,"value": 1}]};
-var width = 960,
+var width = $( window ).width(),
     height = 500;
 
 var color = d3.scale.category20();

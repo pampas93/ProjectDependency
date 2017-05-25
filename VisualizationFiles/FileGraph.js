@@ -42,7 +42,7 @@ var drawGraph = function(graph) {
     .enter().append("line")
       .attr("class", "link")
           .attr("marker-end", "url(#end)")
-      .style("stroke-width", function(d) { return 2; });
+      .style("stroke-width", function(d) { return 2 });
 
   var gnodes = svg.selectAll('g.gnode')
      .data(graph.nodes)

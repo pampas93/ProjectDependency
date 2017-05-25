@@ -1,10 +1,4 @@
-
-                             Dependency-Based CodePublisher - Version 1.0
-    ==============================================================================================
-     Mon May 22 07:57:10 2017
-     Path: "C:\Users\Abhijit\Desktop\ProjectDependency"
-     Args: *.h, *.cpp, /m, /f, /r
                                                                                
 
-    searched   340 dirs
-   processed    64 files
+    searched   397 dirs
+   processed    74 files
