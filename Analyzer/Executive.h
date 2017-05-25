@@ -7,13 +7,16 @@
 //-----------------------------------------------------------------//
 // Jim Fawcett (c) copyright 2016                                  //
 // All rights granted provided this copyright notice is retained   //
+// Modified and Used for Project Dependecy by Abhijit Srikanth-2017//
 //-----------------------------------------------------------------//
 // Language:    C++, Visual Studio 2015                            //
 // Platform:    Dell XPS 8900, Windows 10                          //
-// Application: Project #2, CSE687 - Object Oriented Design, S2016 //
+// Application: Project #2, CSE687 - Object Oriented Design, S2015 //
 // Author:      Jim Fawcett, Syracuse University, CST 4-187        //
-//              jfawcett@twcny.rr.com                              //
+//				Abhijit Srikanth, Syracuse University			   //
 /////////////////////////////////////////////////////////////////////
+
+
 /*
 *  Package Operations:
 *  ===================

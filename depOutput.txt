@@ -1,43 +1,39 @@
-C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\TypeTable\typetable.h
-TypeTable
-
-
-
 C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\Utilities\Utilities.h
 Utilities
+
 
 
 C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlDocument\XmlDocument.h
 XmlDocument
 
+
 C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlElement\XmlElement.h
 XmlElement
+
 C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlElementParts\itokcollection.h
 XmlElementParts
-{"name":"C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlElementParts\Tokenizer.h
+C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlElementParts\Tokenizer.h
 XmlElementParts
-{"name":"C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlElementParts\xmlElementParts.h
+C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlElementParts\xmlElementParts.h
 XmlElementParts
-{"name":"C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlParser\XmlParser.h
+C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlParser\XmlParser.h
 XmlParser
-"name":"C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\TypeTable\typetable.cpp
-TypeTable
-
-
-
-C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\Utilities\Utilities.cpp
+{"name":"C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\Utilities\Utilities.cpp
 Utilities
+
 
 
 C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlDocument\XmlDocument.cpp
 XmlDocument
 
+
 C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlElement\XmlElement.cpp
 XmlElement
+
 C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlElementParts\Tokenizer.cpp
 XmlElementParts
-{"name":"C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlElementParts\xmlElementParts.cpp
+C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlElementParts\xmlElementParts.cpp
 XmlElementParts
-{"name":"C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlParser\XmlParser.cpp
+C:\Users\Abhijit\Desktop\ProjectDependency\XmlDocument\XmlParser\XmlParser.cpp
 XmlParser
-"name":"
+{"name":"
