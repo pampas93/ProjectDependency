@@ -13,9 +13,10 @@
 
 class Visualization {
 public:
-	std::string visualizationMain(std::string json);
+	std::string visualizationMain(std::string json, std::string pjson);
 	void cssPage();
-	void javascriptPage(std::string json);
+	void javascriptFilePage(std::string json);
+	void javascriptProjectPage(std::string pjson);
 
 private:
 	std::string jsonString;

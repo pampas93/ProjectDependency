@@ -1,9 +1,7 @@
 #include "JsonConverter.h"
 
-std::string JsonConverter::jsonMain(MapofDep fileDepMap, MapofDep projDepMap, Files fileListEx)
+void JsonConverter::jsonMain(MapofDep fileDepMap, MapofDep projDepMap, Files fileListEx)
 {
-	std::string jsonString;
-	std::string pjsonString;
 
 	fileDep = fileDepMap;
 	projDep = projDepMap;
@@ -25,9 +23,7 @@ std::string JsonConverter::jsonMain(MapofDep fileDepMap, MapofDep projDepMap, Fi
 	jsonString.append(links);
 	jsonString.append("}");
 
-
-
-	return jsonString;
+	return ;
 }
 
 std::string JsonConverter::nodeString()
@@ -187,6 +183,16 @@ void JsonConverter::buildFile2ProjectMap()
 		}
 	}
 
+}
+
+std::string JsonConverter::returnFileJson()
+{
+	return jsonString;
+}
+
+std::string JsonConverter::returnProjectJson()
+{
+	return pjsonString;
 }
 
 //----------Delimiter function to get Project name , Delimiter used is "//" -------

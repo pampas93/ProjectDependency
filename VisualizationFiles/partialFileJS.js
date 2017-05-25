@@ -1,7 +1,4 @@
-window.onload=function(){
-var graph = 
-{"nodes":[{"name":"Utilities.h","group" : 0},{"name":"XmlDocument.h","group" : 1},{"name":"XmlElement.h","group" : 2},{"name":"itokcollection.h","group" : 3},{"name":"Tokenizer.h","group" : 3},{"name":"xmlElementParts.h","group" : 3},{"name":"XmlParser.h","group" : 4},{"name":"Utilities.cpp","group" : 0},{"name":"XmlDocument.cpp","group" : 1},{"name":"XmlElement.cpp","group" : 2},{"name":"Tokenizer.cpp","group" : 3},{"name":"xmlElementParts.cpp","group" : 3},{"name":"XmlParser.cpp","group" : 4}],"links":[{"source":11,"target":5,"value": 1},{"source":11,"target":4,"value": 1},{"source":6,"target":1,"value": 1},{"source":6,"target":2,"value": 1},{"source":6,"target":8,"value": 1},{"source":6,"target":3,"value": 1},{"source":6,"target":5,"value": 1},{"source":6,"target":4,"value": 1},{"source":6,"target":12,"value": 1},{"source":10,"target":4,"value": 1},{"source":1,"target":2,"value": 1},{"source":1,"target":6,"value": 1},{"source":1,"target":8,"value": 1},{"source":12,"target":6,"value": 1},{"source":12,"target":4,"value": 1},{"source":12,"target":1,"value": 1},{"source":12,"target":5,"value": 1},{"source":12,"target":8,"value": 1},{"source":12,"target":2,"value": 1},{"source":12,"target":0,"value": 1},{"source":5,"target":3,"value": 1},{"source":5,"target":4,"value": 1},{"source":5,"target":11,"value": 1},{"source":8,"target":2,"value": 1},{"source":8,"target":1,"value": 1},{"source":8,"target":6,"value": 1},{"source":7,"target":0,"value": 1},{"source":9,"target":2,"value": 1},{"source":0,"target":7,"value": 1},{"source":4,"target":10,"value": 1},{"source":2,"target":9,"value": 1}]};
-var width = 960,
+var width = $( window ).width(),
     height = 500;
 
 var color = d3.scale.category20();
@@ -89,5 +86,3 @@ var drawGraph = function(graph) {
 };
 
 drawGraph(graph);
-
-}

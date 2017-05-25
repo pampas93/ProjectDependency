@@ -1,4 +1,4 @@
-var width = 960,
+var width = $( window ).width(),
     height = 500;
 
 var color = d3.scale.category20();
@@ -51,17 +51,7 @@ var drawGraph = function(graph) {
       .attr("class", "node")
       .attr("r", 10)
       .style("fill", function(d) { return color(d.group); })
-      .call(force.drag)
-      .on('dblclick', function(d){
-        var url = "../CodePublishHTML/"+d.name+".html";
-
-        var win = window.open(url, '_blank');
-        win.focus();
-
-//        window.alert(d.name);
-
-      });
-
+      .call(force.drag);
 
   var labels = gnodes.append("text")
       .attr("dx", 10)

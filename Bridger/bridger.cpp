@@ -37,7 +37,7 @@ void Bridger::start(char* path)
 
 void Bridger::open()
 {
-	std::string f = "file:///" + FileSystem::Path::getFullFileSpec("../VisualizationFiles/visualization.html");
+	std::string f = "file:///" + FileSystem::Path::getFullFileSpec("../VisualizationFiles/fileVisualization.html");
 	std::wstring ff = std::wstring(f.begin(), f.end());
 	LPCWSTR lpcff = ff.c_str();
 	LPCWSTR a = L"open";

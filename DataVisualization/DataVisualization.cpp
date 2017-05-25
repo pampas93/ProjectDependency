@@ -1,32 +1,13 @@
 #include "DataVisualization.h"
 
-std::string Visualization::visualizationMain(std::string json)
+std::string Visualization::visualizationMain(std::string json, std::string pjson)
 {
-	try {
 
-		visualizationPath = "../VisualizationFiles/visualization.html";
-
-		std::string openHtmlTags = "<html>\n<head>\n";
-		std::string cssLink = "<link rel = \"stylesheet\" type = \"text/css\" href = \"../VisualizationFiles/d3cascading.css\" />\n";
-		std::string jsLink = "\n<script type=\"text/javascript\" src=\"../VisualizationFiles/Graph.js\"></script> \n\n <script src = \"http://d3js.org/d3.v2.min.js?2.9.6\"></script>";
-		std::string pageTitle = "\n<title>Dependency Visualization</title>\n\n</head>\n<body>";
-		std::string closeHtmlTags = "\n</body>\n</html>";
-
-		std::ofstream doc(visualizationPath);
-		doc << openHtmlTags;
-		doc << cssLink;
-		doc << jsLink;
-		doc << pageTitle;
-		doc << closeHtmlTags;
-		doc.close();
-	}
-	catch (const std::exception& e)
-	{
-		std::cout << e.what();
-	}
+	visualizationPath = "../VisualizationFiles/fileVisualization.html";
 
 	cssPage();
-	javascriptPage(json);
+	javascriptFilePage(json);
+	javascriptProjectPage(pjson);
 
 	return visualizationPath;
 }
@@ -52,17 +33,17 @@ void Visualization::cssPage()
 	return;
 }
 
-void Visualization::javascriptPage(std::string json)
+void Visualization::javascriptFilePage(std::string json)
 {
 	std::string jsCode;
 	jsCode.append("window.onload=function(){\nvar graph = \n");
 	jsCode.append(json);
 	jsCode.append(";\n");
 
-	std::string jsPath = "../VisualizationFiles/Graph.js";
+	std::string jsPath = "../VisualizationFiles/FileGraph.js";
 	try {
 
-		std::ifstream document1("../VisualizationFiles/partialJS.js");
+		std::ifstream document1("../VisualizationFiles/partialFileJS.js");
 		std::string graphCode;
 
 		std::string str;
@@ -73,6 +54,41 @@ void Visualization::javascriptPage(std::string json)
 		}
 		document1.close();
 		
+		jsCode.append(graphCode);
+		jsCode.append("\n}");
+
+		std::ofstream doc(jsPath);
+		doc << jsCode;
+		doc.close();
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what();
+	}
+	return;
+}
+
+void Visualization::javascriptProjectPage(std::string pjson)
+{
+	std::string jsCode;
+	jsCode.append("window.onload=function(){\nvar graph = \n");
+	jsCode.append(pjson);
+	jsCode.append(";\n");
+
+	std::string jsPath = "../VisualizationFiles/ProjectGraph.js";
+	try {
+
+		std::ifstream document1("../VisualizationFiles/partialProjectJS.js");
+		std::string graphCode;
+
+		std::string str;
+		while (getline(document1, str))
+		{
+			graphCode.append(str);
+			graphCode.append("\n");
+		}
+		document1.close();
+
 		jsCode.append(graphCode);
 		jsCode.append("\n}");
 

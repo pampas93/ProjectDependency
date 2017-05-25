@@ -14,7 +14,7 @@ public:
 	using FileMap = std::unordered_map<std::string, int>;
 	using Files = std::vector<std::string>;
 
-	std::string jsonMain(MapofDep fileDepMap, MapofDep projDepMap, Files fileListEx);
+	void jsonMain(MapofDep fileDepMap, MapofDep projDepMap, Files fileListEx);
 	std::string nodeString();
 	std::string linksString();
 
@@ -22,9 +22,15 @@ public:
 	std::string projectLinksString();
 	void buildFile2ProjectMap();
 
+	std::string returnFileJson();
+	std::string returnProjectJson();
+
 	std::string delimiterFuncProjectName(std::string fullPath);
 
 private:
+	std::string jsonString;
+	std::string pjsonString;
+
 	MapofDep fileDep;
 	MapofDep projDep;
 	std::unordered_map<std::string, std::string> file2ProjectMap;

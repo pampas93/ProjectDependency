@@ -1002,27 +1002,13 @@ std::unordered_map<std::string, std::vector<std::string>> CodeAnalysis::CodeAnal
 	std::unordered_map<std::string, std::string> fileProjMap = dp.returnFileProjMap();
 
 	JsonConverter jsonObj;
-	std::string jsonMainString = jsonObj.jsonMain(fileDep, projectDep, allsubfiles);
+	jsonObj.jsonMain(fileDep, projectDep, allsubfiles);
+
+	std::string jsonFileString = jsonObj.returnFileJson();
+	std::string jsonProjectString = jsonObj.returnProjectJson();
 	
-	//std::string newPath = "C:/Users/Abhijit/Desktop/ProjectDependency/depOutput.txt";
-	//std::ofstream doc(newPath);
-
 	Visualization vs;
-	std::string vsPath = vs.visualizationMain(jsonMainString);
-
-	//using Item = std::pair<std::string, std::vector<std::string>>;
-	//for (Item item : projectDep)
-	//{
-	//	doc << item.first << "--------->";
-	//	doc << std::endl ;
-	//	//doc << item.second;
-	//	for (std::string y : item.second) {
-	//		doc << y << "\t";
-	//	}
-	//	doc << "\n\n";
-	//}
-	//doc << jsonMainString;
-	//doc.close();
+	std::string vsPath = vs.visualizationMain(jsonFileString, jsonProjectString);
 
 	return projectDep;
 }
