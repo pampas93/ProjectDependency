@@ -1,4 +1,12 @@
 #include "JsonConverter.h"
+/////////////////////////////////////////////////////////////////////
+//  JsonConvertor.cpp										       //
+//																   //
+//  Language:      Visual C++ 2015                                 //
+//  Platform:      Dell Inspiron, Windows 8.1			           //
+//  Application:   ProjectDependency- PempPassionProjects	       //
+//  Author:        Abhijit Srikanth SUID:864888072			       //
+/////////////////////////////////////////////////////////////////////
 
 void JsonConverter::jsonMain(MapofDep fileDepMap, MapofDep projDepMap, Files fileListEx)
 {

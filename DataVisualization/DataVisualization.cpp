@@ -1,4 +1,12 @@
 #include "DataVisualization.h"
+/////////////////////////////////////////////////////////////////////
+//  DataVisualization.cpp									       //
+//																   //
+//  Language:      Visual C++ 2015                                 //
+//  Platform:      Dell Inspiron, Windows 8.1			           //
+//  Application:   ProjectDependency- PempPassionProjects	       //
+//  Author:        Abhijit Srikanth SUID:864888072			       //
+/////////////////////////////////////////////////////////////////////
 
 std::string Visualization::visualizationMain(std::string json, std::string pjson)
 {

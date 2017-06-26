@@ -1,3 +1,12 @@
+/////////////////////////////////////////////////////////////////////
+//  bridger.cpp												       //
+//																   //
+//  Language:      Visual C++ 2015                                 //
+//  Platform:      Dell Inspiron, Windows 8.1			           //
+//  Application:   ProjectDependency- PempPassionProjects	       //
+//  Author:        Abhijit Srikanth SUID:864888072			       //
+/////////////////////////////////////////////////////////////////////
+
 #include "../Bridger/bridger.h"
 #include <string>
 #include <thread>

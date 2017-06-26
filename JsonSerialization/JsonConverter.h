@@ -1,4 +1,23 @@
 #pragma once
+/////////////////////////////////////////////////////////////////////
+//  JsonConvertor.h											       //
+//																   //
+//  Language:      Visual C++ 2015                                 //
+//  Platform:      Dell Inspiron, Windows 8.1			           //
+//  Application:   ProjectDependency- PempPassionProjects	       //
+//  Author:        Abhijit Srikanth SUID:864888072			       //
+/////////////////////////////////////////////////////////////////////
+/*
+Module Operations :
+== == == == == == == == ==
+
+This module defines a JsonConverter class
+* -The functions defined in this class are used for,
+> Builds a JSON string for project nodes based on the dependencies(unordered_map)
+> Builds a JSON string for project links based on the dependencies(unordered_map)
+> Returns the final Json string
+
+*/
 
 #include <string>
 #include <unordered_map>

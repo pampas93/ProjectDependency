@@ -1,4 +1,22 @@
 #pragma once
+/////////////////////////////////////////////////////////////////////
+//  DataVisualization.h										       //
+//																   //
+//  Language:      Visual C++ 2015                                 //
+//  Platform:      Dell Inspiron, Windows 8.1			           //
+//  Application:   ProjectDependency- PempPassionProjects	       //
+//  Author:        Abhijit Srikanth SUID:864888072			       //
+////////////////////////////////////////////////////////////////////
+/*
+Module Operations :
+== == == == == == == == ==
+
+This module defines a Visualization class
+* -The functions defined in this class are used for,
+> Calls the JsonSerialization class to build the JSON
+> Builds the HTML and Javascript files
+
+*/
 
 #include <iostream>
 #include <locale>
